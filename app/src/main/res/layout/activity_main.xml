@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/expression"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/paddingRow"
+        android:textSize="30dp"
+        android:background="@color/colorAccent"
+        android:layout_gravity="end"
+        android:textAlignment="textEnd"
+        android:maxLength="20"/>
+
+    <Button
+        android:id="@+id/backspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="⌫"
+        android:onClick="backspaceEvent"
+        android:layout_marginRight="@dimen/paddingRow"/>
+
+    <RelativeLayout
+        android:id="@+id/baseCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/paddingRow">
+
+        <ImageView
+            android:id="@+id/flagBase"
+            android:src="@drawable/ic_vietnam_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/marginRightOfFlag"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/currencyBase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/flagBase"
+            android:layout_centerVertical="true"
+            android:text="VND"
+            android:textSize="20dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/amountBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="25dp"
+                android:layout_gravity="right"/>
+
+            <TextView
+                android:id="@+id/fullCurrencyBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Vietnamese Dong ₫"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/targetCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/paddingRow">
+
+        <ImageView
+            android:id="@+id/flagTarget"
+            android:src="@drawable/ic_united_states_of_america_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/marginRightOfFlag"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/currencyTarget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/flagTarget"
+            android:layout_centerVertical="true"
+            android:text="USD"
+            android:textSize="20dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/amountTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text="0"
+                android:layout_gravity="right"/>
+
+            <TextView
+                android:id="@+id/fullCurrencyTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="United States Dollar $"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/numpad"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal">-->
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="4"
+        android:columnCount="4"
+        android:layout_gravity="center"
+        android:padding="@dimen/paddingRow"/>
+<!--        <LinearLayout-->
+<!--            android:id="@+id/operators"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_toRightOf="@+id/gridLayout"/>-->
+
+<!--    </RelativeLayout>-->
+
+</LinearLayout>
