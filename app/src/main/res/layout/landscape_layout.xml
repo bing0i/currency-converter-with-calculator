@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/expression"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingRow"
+            android:textSize="19sp"
+            android:background="@color/colorLightPrimary"
+            android:layout_gravity="end"
+            android:textAlignment="textEnd"
+            android:maxLength="20"/>
+
+        <TextView
+            android:id="@+id/dummy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="3sp"
+            android:background="@color/colorPrimaryDark"/>
+
+        <RelativeLayout
+            android:id="@+id/baseCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/paddingRow">
+
+            <ImageView
+                android:id="@+id/flagBase"
+                android:src="@drawable/ic_vietnam_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="@dimen/marginRightOfFlag"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/currencyBase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/flagBase"
+                android:layout_centerVertical="true"
+                android:text="VND"
+                android:textSize="20sp"
+                android:textColor="@color/secondaryText"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:id="@+id/amountBase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0"
+                    android:textSize="25sp"
+                    android:textColor="@color/primaryText"
+                    android:layout_gravity="right"/>
+
+                <TextView
+                    android:id="@+id/fullCurrencyBase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="Vietnamese Dong ₫"
+                    android:textColor="@color/secondaryText"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/numpad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/primaryText">
+            <LinearLayout
+                android:id="@+id/column1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/column2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/column3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/column4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnAdd"
+            android:layout_alignParentTop="true"/>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="30sp"
+            android:textColor="@color/iconAndText"
+            android:background="@color/colorAccent"
+            android:onClick="startSelectionActivity"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>
