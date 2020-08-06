@@ -12,4 +12,11 @@ public class CurrencyInfo {
         flagPath = path;
     }
 
+    public CurrencyInfo(String curr, String fCurr, int path, double amt) {
+        currency = curr;
+        fullCurrency = fCurr;
+        flagPath = path;
+        amount = amt;
+    }
+
 }
