@@ -3,9 +3,11 @@ package com.example.currencyconverter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public static ResultCurrencyAdapter resultCurrencyAdapter = null;
     private static String expression = "";
     private static String baseAmount = "0.0";
+    public static GetRatesTask getRatesTask = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setListView();
         createColumnsOfNumpad();
         initializeSelectionCurrencyInfoArrayList();
+        getRatesTask = new GetRatesTask(getApplicationContext());
+        getRatesTask.getJSON();
     }
 
     @Override
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("CAD", "Canadian Dollar C$", R.drawable.ic_canada_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("AUD", "Australian Dollar A$", R.drawable.ic_australia_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("KRW", "South Korean Won ₩", R.drawable.ic_south_korea_flag));
-        SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("TWD", "New Taiwan Dollar NT$", R.drawable.ic_taiwan_flag));
+//        SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("TWD", "New Taiwan Dollar NT$", R.drawable.ic_taiwan_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("RUB", "Russian Ruble ₽", R.drawable.ic_russia_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("NZD", "New Zealand Dollar NZ$", R.drawable.ic_new_zealand_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("THB", "Thai Baht ฿", R.drawable.ic_thailand_flag));
@@ -144,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         CurrencyInfo currencyInfo = null;
         for (int i = 0; i < currencyInfoArrayList.size(); i++) {
             currencyInfo = currencyInfoArrayList.get(i);
-            CurrencyConverter converter = new CurrencyConverter(resultCal, currencyInfo.currency);
+            CurrencyConverter converter = new CurrencyConverter(resultCal, currencyInfo.currency, getRatesTask.getRate(currencyInfo.currency));
             resultConv = round(converter.convert(), 2);
             currencyInfo.amount = resultConv;
             currencyInfoArrayList.set(i, currencyInfo);

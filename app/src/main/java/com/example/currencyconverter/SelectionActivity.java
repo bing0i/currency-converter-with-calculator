@@ -52,7 +52,7 @@ public class SelectionActivity extends AppCompatActivity {
         Calculator cal = new Calculator(text);
         double resultCal = cal.calculate();
         double resultConv = 0.0;
-        CurrencyConverter converter = new CurrencyConverter(resultCal, currencyInfo.currency);
+        CurrencyConverter converter = new CurrencyConverter(resultCal, currencyInfo.currency, MainActivity.getRatesTask.getRate(currencyInfo.currency));
         resultConv = MainActivity.round(converter.convert(), 2);
         currencyInfo.amount = resultConv;
         return currencyInfo;
