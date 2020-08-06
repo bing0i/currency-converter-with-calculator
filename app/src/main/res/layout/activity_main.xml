@@ -34,7 +34,7 @@
 
         <ImageView
             android:id="@+id/flagBase"
-            android:src="@drawable/ic_vietnam_flag"
+            android:src="@drawable/ic_europe_flag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/flagBase"
             android:layout_centerVertical="true"
-            android:text="VND"
+            android:text="EUR"
             android:textColor="@color/secondaryText"
             android:textSize="20sp"/>
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="Vietnamese Dong ₫"
+                android:text="Euro €"
                 android:textColor="@color/secondaryText"/>
         </LinearLayout>
     </RelativeLayout>
