@@ -1,6 +1,7 @@
 package com.example.currencyconverter;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,13 +14,10 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class GetRatesTask {
-    private static Context context;
-    JSONObject ratesObj = null;
-    private static String jsonString = "";
-    private static String baseCurrency = "";
-    private static String date = "";
-    private static double result = 0;
+    private Context context;
 
     public GetRatesTask(Context ct) {
         context = ct;
@@ -34,7 +32,7 @@ public class GetRatesTask {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        jsonString = String.valueOf(response);
+                        writeSDCard(String.valueOf(response));
                     }
                 }, new Response.ErrorListener() {
 
@@ -47,14 +45,28 @@ public class GetRatesTask {
         queue.add(jsonObjectRequest);
     }
 
-    public void getRates(String currency) {
+    private void writeSDCard(String s) {
+        ArrayList<String> strings = new ArrayList<String>();
+        strings.add(s);
+        WriteSDCard writeSDCard = new WriteSDCard();
+        writeSDCard.checkExternalMedia();
+        writeSDCard.writeToSDFile(strings);
+    }
+
+    public double getRate(String currency) {
+        String jsonString = "";
+        double result = 0.0;
+        WriteSDCard readSDCard = new WriteSDCard();
+        if (readSDCard.readFromSDFile())
+            jsonString = WriteSDCard.strings.get(0);
+        else
+            return result;
         try {
-            ratesObj = new JSONObject(jsonString);
-            baseCurrency = ratesObj.getString("base");
-            date = ratesObj.getString("date");
-            ratesObj = ratesObj.getJSONObject("rates");
+            JSONObject ratesObj = new JSONObject(jsonString).getJSONObject("rates");;
+            result = ratesObj.getDouble(currency);
         } catch (JSONException e) {
             Toast.makeText(context, "Fail to parse JSON", Toast.LENGTH_SHORT);
         }
+        return result;
     }
 }
