@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -53,6 +56,27 @@ public class MainActivity extends AppCompatActivity {
         setBaseAmountAndExpression();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.history:
+                Intent intent = new Intent(this, HistoryActivity.class);
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
     private void setBaseAmountAndExpression() {
         TextView tvBaseAmount = (TextView)findViewById(R.id.amountBase);
         tvBaseAmount.setText(baseAmount);
@@ -62,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeSelectionCurrencyInfoArrayList() {
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("USD", "United States Dollar US$", R.drawable.ic_united_states_of_america_flag));
-        SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("EUR", "Euro €", R.drawable.ic_europe_flag));
+//        SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("EUR", "Euro €", R.drawable.ic_europe_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("JPY", "Japanese Yen ¥", R.drawable.ic_japan_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("GBP", "Pound Sterling £", R.drawable.ic_united_kingdom_flag));
         SelectionActivity.selectionCurrencyInfoArrayList.add(new CurrencyInfo("CAD", "Canadian Dollar C$", R.drawable.ic_canada_flag));

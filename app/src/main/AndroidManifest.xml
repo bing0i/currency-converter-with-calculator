@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".HistoryActivity" />
         <activity android:name=".SelectionActivity" />
         <activity android:name=".MainActivity" android:configChanges="orientation|screenSize">
             <intent-filter>
