@@ -50,14 +50,14 @@ public class GetRatesTask {
         strings.add(s);
         WriteSDCard writeSDCard = new WriteSDCard();
         writeSDCard.checkExternalMedia();
-        writeSDCard.writeToSDFile(strings);
+        writeSDCard.writeToSDFile(strings, " exchangeRates.txt", false);
     }
 
     public double getRate(String currency) {
         String jsonString = "";
         double result = 0.0;
         WriteSDCard readSDCard = new WriteSDCard();
-        if (readSDCard.readFromSDFile())
+        if (readSDCard.readFromSDFile(" exchangeRates.txt"))
             jsonString = WriteSDCard.strings.get(0);
         else
             return result;

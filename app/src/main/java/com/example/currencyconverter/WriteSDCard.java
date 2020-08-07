@@ -38,23 +38,25 @@ public class WriteSDCard {
             // Can't read or write
             mExternalStorageAvailable = mExternalStorageWriteable = false;
         }
-        Log.d(TAG, "\n\nExternal Media: readable = " + mExternalStorageAvailable +
-                " writable = " + mExternalStorageWriteable);
+        Log.d(TAG, "\n\nExternal Media: Readable = " + mExternalStorageAvailable +
+                ", Writable = " + mExternalStorageWriteable);
     }
 
     /** Method to write ascii text characters to file on SD card. Note that you must add a
      WRITE_EXTERNAL_STORAGE permission to the manifest file or this method will throw
      a FileNotFound Exception because you won't have write permission. */
-    public void writeToSDFile(ArrayList<String> stringArray) {
+    public void writeToSDFile(ArrayList<String> stringArray, String nameFile, boolean append) {
         // Find the root of the external storage.
         // See http://developer.android.com/guide/topics/data/data-  storage.html#filesExternal
         File root = android.os.Environment.getExternalStorageDirectory();
         // See http://stackoverflow.com/questions/3551821/android-write-to-sd-card-folder
-        File dir = new File (root.getAbsolutePath() + "/download");
+        File dir = new File (root.getAbsolutePath() + "/currencyConverter");
         dir.mkdirs();
-        File file = new File(dir, " exchangeRates.txt");
+        File file = new File(dir, nameFile);
+        if (!file.exists())
+            append = false;
         try {
-            FileOutputStream f = new FileOutputStream(file, false);
+            FileOutputStream f = new FileOutputStream(file, append);
             PrintWriter pw = new PrintWriter(f);
             for (int i = 0; i < stringArray.size(); i++) {
                 pw.println(stringArray.get(i));
@@ -73,11 +75,11 @@ public class WriteSDCard {
 
     /** Method to read in a text file placed in the res/raw directory of the application. The
      method reads in all lines of the file sequentially. */
-    public boolean readFromSDFile(){
+    public boolean readFromSDFile(String nameFile){
         File root = android.os.Environment.getExternalStorageDirectory();
-        File dir = new File (root.getAbsolutePath() + "/download");
+        File dir = new File (root.getAbsolutePath() + "/currencyConverter");
         dir.mkdirs();
-        File file = new File(dir, " exchangeRates.txt");
+        File file = new File(dir, nameFile);
         if (!file.exists())
             return false;
         try {
@@ -90,7 +92,7 @@ public class WriteSDCard {
             br.close();
         }
         catch (IOException e) {
-            Log.d(TAG, "Fail to read exchangeRates.txt");
+            Log.d(TAG, "Fail to read file");
             return false;
         }
         return true;
