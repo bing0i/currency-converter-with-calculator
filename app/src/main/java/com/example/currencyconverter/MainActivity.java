@@ -18,9 +18,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     public static ArrayList<CurrencyInfo> currencyInfoArrayList = new ArrayList<>();
@@ -28,6 +32,35 @@ public class MainActivity extends AppCompatActivity {
     private static String expression = "";
     private static String baseAmount = "0.0";
     public static GetRatesTask getRatesTask = null;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Date currentTime = Calendar.getInstance().getTime();
+        JSONObject json = new JSONObject(); //creates main json
+        try {
+            json.put("dateAndTime", currentTime.toString());
+            json.put("amount", baseAmount);
+            JSONObject targets = new JSONObject();
+            for (int i = 0; i < currencyInfoArrayList.size(); i++) {
+                JSONObject currencyInfo = new JSONObject();
+                currencyInfo.put("currency", currencyInfoArrayList.get(i).currency);
+                currencyInfo.put("fullCurrency", currencyInfoArrayList.get(i).fullCurrency);
+                currencyInfo.put("flagPath", currencyInfoArrayList.get(i).flagPath);
+                currencyInfo.put("amount", currencyInfoArrayList.get(i).amount);
+                targets.put(currencyInfoArrayList.get(i).currency, currencyInfo);
+            }
+            json.put("targetCurrencies", targets);
+        } catch (Exception e) {
+            Log.d("FAILLL", "Fail to put JSON of currencyInfoArrayList");
+        }
+        String jsonString = json.toString();
+        ArrayList<String> strings = new ArrayList<String>();
+        strings.add(jsonString);
+        WriteSDCard writeSDCard = new WriteSDCard();
+        writeSDCard.checkExternalMedia();
+        writeSDCard.writeToSDFile(strings, " historyList.txt", true);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
