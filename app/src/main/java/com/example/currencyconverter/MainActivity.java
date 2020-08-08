@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
@@ -34,23 +35,31 @@ public class MainActivity extends AppCompatActivity {
     public static GetRatesTask getRatesTask = null;
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         Date currentTime = Calendar.getInstance().getTime();
         JSONObject json = new JSONObject(); //creates main json
         try {
             json.put("dateAndTime", currentTime.toString());
             json.put("amount", baseAmount);
-            JSONObject targets = new JSONObject();
+            JSONArray currencyInfos = new JSONArray();
+            JSONObject currencyInfo = new JSONObject();
+
+            currencyInfo.put("currency", "EUR");
+            currencyInfo.put("fullCurrency", "Euro €");
+            currencyInfo.put("flagPath", R.drawable.ic_europe_flag);
+            currencyInfo.put("amount", Double.valueOf(baseAmount));
+            currencyInfos.put(currencyInfo);
+
             for (int i = 0; i < currencyInfoArrayList.size(); i++) {
-                JSONObject currencyInfo = new JSONObject();
+                currencyInfo = new JSONObject();
                 currencyInfo.put("currency", currencyInfoArrayList.get(i).currency);
                 currencyInfo.put("fullCurrency", currencyInfoArrayList.get(i).fullCurrency);
                 currencyInfo.put("flagPath", currencyInfoArrayList.get(i).flagPath);
                 currencyInfo.put("amount", currencyInfoArrayList.get(i).amount);
-                targets.put(currencyInfoArrayList.get(i).currency, currencyInfo);
+                currencyInfos.put(currencyInfo);
             }
-            json.put("targetCurrencies", targets);
+            json.put("targetCurrencies", currencyInfos);
         } catch (Exception e) {
             Log.d("FAILLL", "Fail to put JSON of currencyInfoArrayList");
         }
