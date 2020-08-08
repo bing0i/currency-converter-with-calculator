@@ -1,7 +1,9 @@
 package com.example.currencyconverter;
 
+import java.util.ArrayList;
+
 public class HistoryInfo {
-    public CurrencyInfo[] targetCurrencies = null;
+    public ArrayList<CurrencyInfo> targetCurrencies = new ArrayList<>();
     public String dateAndTime = "";
     public String amount = "";
 
@@ -9,7 +11,11 @@ public class HistoryInfo {
         dateAndTime = date;
         amount = amt;
     }
-    public HistoryInfo(CurrencyInfo[] targets) {
+
+    public HistoryInfo(ArrayList<CurrencyInfo> targets, String date, String amt) {
+        dateAndTime = date;
+        amount = amt;
         targetCurrencies = targets;
     }
+
 }
