@@ -38,7 +38,7 @@ public class SelectionActivity extends AppCompatActivity {
                 selectionCurrencyInfoArrayList.remove(currencyInfo);
                 currencyAdapter.notifyDataSetChanged();
 
-                String text = getIntent().getStringExtra("expression");
+                String text = getIntent().getStringExtra("baseAmount");
 
                 MainActivity.currencyInfoArrayList.add(setAmountOfSingleRow(text, currencyInfo));
                 MainActivity.resultCurrencyAdapter.notifyDataSetChanged();

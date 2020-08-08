@@ -294,7 +294,9 @@ public class MainActivity extends AppCompatActivity {
         if (SelectionActivity.selectionCurrencyInfoArrayList.size() == 0)
             return;
         Intent intent = new Intent(this, SelectionActivity.class);
-        intent.putExtra("expression", expression);
+        TextView tv = (TextView)findViewById(R.id.amountBase);
+        String baseAmt = tv.getText().toString();
+        intent.putExtra("baseAmount", baseAmt);
         startActivity(intent);
     }
 }
