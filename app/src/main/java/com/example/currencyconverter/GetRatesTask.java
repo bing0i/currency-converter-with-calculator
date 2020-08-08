@@ -2,7 +2,6 @@ package com.example.currencyconverter;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,7 +37,7 @@ public class GetRatesTask {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "Fail to get JSON", Toast.LENGTH_SHORT);
+                        Log.d("FAILLL", "Fail to get JSON (exchangeRates.txt)");
                     }
                 });
 
@@ -65,7 +64,7 @@ public class GetRatesTask {
             JSONObject ratesObj = new JSONObject(jsonString).getJSONObject("rates");;
             result = ratesObj.getDouble(currency);
         } catch (JSONException e) {
-            Toast.makeText(context, "Fail to parse JSON", Toast.LENGTH_SHORT);
+            Log.d("FAILLL", "Fail to parse JSON (exchangeRates.txt)");
         }
         return result;
     }
